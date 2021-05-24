@@ -1,0 +1,24 @@
+pipeline { 
+    agent {
+        label 'chef'
+        }
+        parameters {
+            string(name: IP, defaultValue: '')
+            string(name: NodeName, defaultValue: '')
+        }
+        stages { 
+            stage ('Chef Node Bootstrap') { 
+                steps { 
+                    sh 'pwd'
+                    dir('/home/ec2-user/chef-repo') {
+                        sh 'pwd'
+                        withCredentials([sshUserPrivateKey(credentialsId: 'ssh', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'ec2-user')]) {
+                        
+                            sh 'knife bootstrap ${IP} -U ec2-user --sudo -i $key -N ${NodeName} -y'
+                        }
+                    }
+                    sh 'pwd'
+                }
+            }
+        }
+    }
