@@ -11,7 +11,7 @@ pipeline {
             }
             stage ('Cookbook Upload') { 
                 steps {
-                    sh 'sudo cp -r $WORKSPACE/* /home/ec2-user/chef-repo/cookbooks/${CookbookName}'
+                    sh 'cp -r $WORKSPACE/* /home/ec2-user/chef-repo/cookbooks/${CookbookName}'
                     dir('/home/ec2-user/chef-repo/cookbooks') {
                         sh 'pwd'
                         sh 'knife upload ${CookbookName}'
