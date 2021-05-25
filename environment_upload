@@ -19,8 +19,7 @@ pipeline {
                     sh 'sudo cp -r "$WORKSPACE" /home/ec2-user/chef-repo/environments'
                     dir('/home/ec2-user/chef-repo/environments') {
                         sh 'pwd'
-                        sh 'knife upload environment/*'
-                        sh 'knife node node2 environment _default stage' 
+                        sh 'knife upload environment/*' 
                         sh 'knife node environment set node1 dev'
                         sh 'knife node environment set node2 stage'
 
