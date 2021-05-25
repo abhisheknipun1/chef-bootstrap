@@ -8,8 +8,10 @@ pipeline {
         }
         stages { 
             stage ('Checkout') {
-              cleanws()
-              checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*{branch}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/abhisheknipun1/${CookbookName}.git']]]
+                steps{
+                     cleanws()
+                    checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*{branch}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/abhisheknipun1/${CookbookName}.git']]]
+                }
             }
             stage ('Cookbook Upload') { 
                 steps { 
