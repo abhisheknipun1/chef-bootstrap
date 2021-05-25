@@ -1,0 +1,27 @@
+pipeline { 
+    agent {
+        label 'chef'
+        }
+        stages { 
+            stage ('Checkout') {
+                steps{
+                     cleanWs()
+                    checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '${branch}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/abhisheknipun1/${CookbookName}.git']]]
+                }
+            }
+            stage ('Environment Upload') { 
+                steps {
+                    dir('/home/ec2-user/chef-repo/) {
+                       sh 'pwd'
+                        sh 'knife download environments'
+                    }
+                    sh 'cp -r $WORKSPACE/* /home/ec2-user/chef-repo/environments'
+                    dir('/home/ec2-user/chef-repo/environments') {
+                        sh 'pwd'
+                        sh 'knife upload environment/*'
+                        
+                     }
+                }
+         }
+     }
+}
