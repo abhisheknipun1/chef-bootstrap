@@ -11,15 +11,21 @@ pipeline {
             }
             stage ('Cookbook Upload') { 
                 steps { 
+                    script{
                     sh 'pwd'
-                    sh 'tree'
-                    sh 'rm -r /home/ec2-user/chef-repo/${CookbookName}'
-                    sh 'ls -lrt /home/ec2-user/chef-repo'
-                    sh 'ls -lrt /home/ec2-user/chef-repo'
-                    sh 'cp . /home/ec2-user/chef-repo'
-                    dir('/home/ec2-user/chef-repo') {
+                    
+                    sh 'ls -lrt /home/ec2-user/chef-repo/cookbooks'
+                    if (fileExists "/home/ec2-user/chef-repo/cookbooks/${CookbookName}) {
+                        sh 'rm -r /home/ec2-user/chef-repo/cookbooks/${CookbookName}'
+                        }
+                    
+                    sh 'ls -lrt /home/ec2-user/chef-repo/cookbooks'
+                     sh 'ls -lrt /home/ec2-user/chef-repo/cookbooks'
+                    sh 'cp . /home/ec2-user/chef-repo/cookbooks'
+                    dir('/home/ec2-user/chef-repo/cookbooks') {
                         sh 'pwd'
                         sh 'knife upload ${CookbookName}'
+                        }
                      }
                 }
          }
