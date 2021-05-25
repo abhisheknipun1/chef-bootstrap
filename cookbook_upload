@@ -15,7 +15,7 @@ pipeline {
                     sh 'pwd'
                     
                     sh 'ls -lrt /home/ec2-user/chef-repo/cookbooks'
-                    if (fileExists "/home/ec2-user/chef-repo/cookbooks/${CookbookName}) {
+                    if (fileExists "/home/ec2-user/chef-repo/cookbooks/${CookbookName}") {
                         sh 'rm -r /home/ec2-user/chef-repo/cookbooks/${CookbookName}'
                         }
                     
