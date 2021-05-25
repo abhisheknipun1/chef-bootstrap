@@ -11,7 +11,7 @@ pipeline {
             }
             stage ('Environment Upload') { 
                 steps {
-                    dir('/home/ec2-user/chef-repo/) {
+                    dir('/home/ec2-user/chef-repo/') {
                        sh 'pwd'
                         sh 'knife download environments'
                     }
@@ -19,7 +19,8 @@ pipeline {
                     dir('/home/ec2-user/chef-repo/environments') {
                         sh 'pwd'
                         sh 'knife upload environment/*'
-                        
+                        sh 'knife node node1 environment _default dev'
+                        sh 'knife node node2 environment _default stage'                        
                      }
                 }
          }
