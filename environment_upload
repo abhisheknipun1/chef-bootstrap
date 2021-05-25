@@ -32,7 +32,7 @@ pipeline {
                     }
                     sh 'pwd;ls'
                     sh 'cd nodes'
-                    sh 'cp *.json /home/ec2-user/chef-repo/nodes/'
+                    sh 'cp nodes/*.json /home/ec2-user/chef-repo/nodes/'
                     dir('/home/ec2-user/chef-repo/') {
                         sh 'pwd;ls'
                         sh 'knife upload .'
