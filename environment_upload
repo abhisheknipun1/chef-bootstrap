@@ -20,8 +20,10 @@ pipeline {
                     dir('/home/ec2-user/chef-repo/environments') {
                         sh 'pwd'
                         sh 'knife upload environment/*'
-                        sh 'knife node node1 environment _default dev'
-                        sh 'knife node node2 environment _default stage'                        
+                        sh 'knife node node2 environment _default stage' 
+                        sh 'knife node environment set node1 dev'
+                        sh 'knife node environment set node2 stage'
+
                      }
                 }
          }
