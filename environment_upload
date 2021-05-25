@@ -31,7 +31,8 @@ pipeline {
                         sh 'sudo knife download nodes'
                     }
                     sh 'pwd;ls'
-                    sh 'sudo cp nodes/*.json /home/ec2-user/chef-repo/nodes/'
+                    sh 'cd nodes'
+                    sh 'sudo cp *.json /home/ec2-user/chef-repo/nodes/'
                     dir('/home/ec2-user/chef-repo/nodes') {
                         sh 'pwd;ls'
                         sh 'sudo knife upload .'
