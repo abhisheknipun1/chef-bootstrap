@@ -13,13 +13,13 @@ pipeline {
                 steps {
                     dir('/home/ec2-user/chef-repo/') {
                        sh 'pwd'
-                        sh 'sudo knife download environments'
+                        sh 'knife download environments'
                     }
                     sh 'pwd;ls'
                     sh 'sudo cp *.json /home/ec2-user/chef-repo/environments/'
                     dir('/home/ec2-user/chef-repo/environments') {
                         sh 'pwd;ls'
-                        sh 'sudo knife upload .'
+                        sh 'knife upload .'
 
                      }
                 }
@@ -28,14 +28,14 @@ pipeline {
                 steps {
                     dir('/home/ec2-user/chef-repo/') {
                        sh 'pwd'
-                        sh 'sudo knife download nodes'
+                        sh 'knife download nodes'
                     }
                     sh 'pwd;ls'
                     sh 'cd nodes'
-                    sh 'sudo cp *.json /home/ec2-user/chef-repo/nodes/'
-                    dir('/home/ec2-user/chef-repo/nodes') {
+                    sh 'cp *.json /home/ec2-user/chef-repo/nodes/'
+                    dir('/home/ec2-user/chef-repo/') {
                         sh 'pwd;ls'
-                        sh 'sudo knife upload .'
+                        sh 'knife upload nodes .
 
                      }
                 }
