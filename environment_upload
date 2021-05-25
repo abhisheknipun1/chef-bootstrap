@@ -17,9 +17,9 @@ pipeline {
                     }
                     sh 'pwd;ls'
                     sh 'sudo cp * /home/ec2-user/chef-repo/environments/'
-                    dir('/home/ec2-user/chef-repo/') {
+                    dir('/home/ec2-user/chef-repo/environments') {
                         sh 'pwd;ls'
-                        sh 'knife upload /environments/*'
+                        sh 'knife upload .'
 
                      }
                 }
