@@ -9,7 +9,7 @@ pipeline {
         stages { 
             stage ('Checkout') {
                 steps{
-                     cleanws()
+                     cleanWs()
                     checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*{branch}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/abhisheknipun1/${CookbookName}.git']]]
                 }
             }
