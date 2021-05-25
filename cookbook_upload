@@ -12,14 +12,14 @@ pipeline {
             stage ('Cookbook Upload') { 
                 steps { 
                     script{
-                    sh 'pwd'
+                    sh 'pwd;ls'
                     
                     sh 'ls -lrt /home/ec2-user/chef-repo/cookbooks'
                     if (fileExists('/home/ec2-user/chef-repo/cookbooks/${CookbookName')) {
                         sh 'rm -r /home/ec2-user/chef-repo/cookbooks/${CookbookName}'
                         }
                     sh 'ls -lrt /home/ec2-user/chef-repo/cookbooks'
-                    sh 'cp ${CookbookName} /home/ec2-user/chef-repo/cookbooks'
+                    sh 'cp $WORKSPACE/${CookbookName} /home/ec2-user/chef-repo/cookbooks'
                     dir('/home/ec2-user/chef-repo/cookbooks') {
                         sh 'pwd'
                         sh 'knife upload ${CookbookName}'
