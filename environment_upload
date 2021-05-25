@@ -16,7 +16,7 @@ pipeline {
                         sh 'knife download environments'
                     }
                     sh 'pwd;ls'
-                    sh 'sudo cp -r "$WORKSPACE/*" /home/ec2-user/chef-repo/environments'
+                    sh 'sudo cp -r "$WORKSPACE/*.json" /home/ec2-user/chef-repo/environments'
                     dir('/home/ec2-user/chef-repo/environments') {
                         sh 'pwd;ls'
                         sh 'knife upload *'
