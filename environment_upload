@@ -35,7 +35,7 @@ pipeline {
                     sh 'cp *.json /home/ec2-user/chef-repo/nodes/'
                     dir('/home/ec2-user/chef-repo/') {
                         sh 'pwd;ls'
-                        sh 'knife upload .
+                        sh 'knife upload .'
 
                      }
                 }
