@@ -24,5 +24,20 @@ pipeline {
                      }
                 }
          }
+         stage ('Node Object Upload') { 
+                steps {
+                    dir('/home/ec2-user/chef-repo/') {
+                       sh 'pwd'
+                        sh 'knife download nodes'
+                    }
+                    sh 'pwd;ls'
+                    sh 'sudo cp nodes/* /home/ec2-user/chef-repo/nodes/'
+                    dir('/home/ec2-user/chef-repo/nodes') {
+                        sh 'pwd;ls'
+                        sh 'knife upload .'
+
+                     }
+                }
+         }
      }
 }
