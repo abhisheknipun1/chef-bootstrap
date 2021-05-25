@@ -1,0 +1,29 @@
+pipeline { 
+    agent {
+        label 'chef'
+        }
+        parameters {
+            string(name: CookbookName, defaultValue: '')
+            string(name: Branch, defaultValue: 'master')
+        }
+        stages { 
+            stage ('Checkout') {
+              cleanws()
+              checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*{branch}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/abhisheknipun1/${CookbookName}.git']]]
+            }
+            stage ('Chef Node Bootstrap') { 
+                steps { 
+                    sh 'pwd'
+                    sh 'tree'
+                    sh 'rm -r /home/ec2-user/chef-repo/${CookbookName}'
+                    sh 'ls -lrt /home/ec2-user/chef-repo'
+                    sh 'ls -lrt /home/ec2-user/chef-repo'
+                    sh 'cp . /home/ec2-user/chef-repo'
+                    dir('/home/ec2-user/chef-repo') {
+                        sh 'pwd'
+                        sh 'knife upload ${CookbookName}'
+                     }
+                }
+         }
+}
+                        
