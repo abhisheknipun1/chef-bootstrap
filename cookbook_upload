@@ -2,10 +2,6 @@ pipeline {
     agent {
         label 'chef'
         }
-        parameters {
-            string(name: CookbookName, defaultValue: '')
-            string(name: Branch, defaultValue: 'main')
-        }
         stages { 
             stage ('Checkout') {
                 steps{
