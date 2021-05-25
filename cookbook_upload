@@ -4,7 +4,7 @@ pipeline {
         }
         parameters {
             string(name: CookbookName, defaultValue: '')
-            string(name: Branch, defaultValue: 'master')
+            string(name: Branch, defaultValue: 'main')
         }
         stages { 
             stage ('Checkout') {
