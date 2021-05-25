@@ -2,10 +2,7 @@ pipeline {
     agent {
         label 'chef'
         }
-        parameters {
-            string(name: IP, defaultValue: '')
-            string(name: NodeName, defaultValue: '')
-        }
+       
         stages { 
             stage ('Chef Node Bootstrap') { 
                 steps { 
